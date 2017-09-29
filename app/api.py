@@ -16,9 +16,9 @@ class DoveletLogin(Resource):
         id = args['id']
         passwd = args['passwd']
 
-        success = dove_request.login(id, passwd)
+        cookies = dove_request.login(id, passwd)
 
-        return {'success': success}
+        return {'cookies': cookies}
 
 @api_root.resource('/stair/<int:stair_num>')
 class DovletStair(Resource):

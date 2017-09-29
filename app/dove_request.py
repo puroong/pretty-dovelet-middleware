@@ -4,11 +4,8 @@ from bs4 import BeautifulSoup
 from app import app
 
 class DoveRequest:
-    def __init__(self):
-        self.login_session = requests.Session()
-
-    def is_logged_in(self):
-        cookies = set(self.login_session.cookies.keys())
+    def is_logged_in(self, cookies):
+        cookies = set(cookies.keys())
         required_cookies = set(['PHPSESSID', 'member_id', 'member_sid', 'member_passwd'])
 
         if len(cookies ^ required_cookies) is 0:
@@ -17,17 +14,19 @@ class DoveRequest:
             return False
 
     def login(self, id, passwd):
-        self.login_session.post(app.config['DOVELET_HOST']+'/login.php', data={'id': id, 'passwd': passwd})
+        r = requests.post(app.config['DOVELET_HOST']+'/login.php', data={'id': id, 'passwd': passwd})
+        cookies = dict(zip(r.cookies.keys(), r.cookies.values()))
 
-        if self.is_logged_in():
-            return True
+        if self.is_logged_in(cookies):
+            return cookies
         else:
-            return False
+            return None
 
     #no auth
     def get_stair(self, stair_num):
+        # TODO: cookies = # pass cookie
         # select numbers are 3n-2, but if other than these numbers is given, all problems are returned
-        r = self.login_session.get(app.config['DOVELET_HOST']+'/30stair/index.php?select=2')
+        r = request.get(app.config['DOVELET_HOST']+'/30stair/index.php?select=2', cookies=cookies)
 
         soup = BeautifulSoup(r.text, "html.parser")
 
@@ -53,7 +52,8 @@ class DoveRequest:
 
     #no auth
     def get_problem(self, full_link):
-        r = self.login_session.get(full_link)
+        # TODO: cookies = # pass cookies
+        r = requests.get(full_link)
 
         text = r.text.split('<hr>')[0]
         text += '</body>'
@@ -64,7 +64,8 @@ class DoveRequest:
 
     #auth required
     def submit(self, title, language, src):
-        if self.is_logged_in():
+        # TODO: cookies =  pass cookies
+        if self.is_logged_in(cookies):
             eng_title = title.split('/')[1]
             r = self.login_session.post(app.config['DOVELET_HOST']+'/30stair/post.php?pname='+eng_title, data={'select': language, 'src': src})
 
