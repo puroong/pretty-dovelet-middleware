@@ -88,8 +88,9 @@ class Dovelet():
 
     # TODO: parse html
     html = r.text
-    
-    return html
+    code = r.status_code
+
+    return code, html
 
   def problem_submit(self, title, language, source, cookies):
     url = self.make_url(self.config.PROBLEM_SUBMIT_URL, {
