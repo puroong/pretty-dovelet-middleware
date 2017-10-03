@@ -1,0 +1,6 @@
+{
+ "name": "pretty-dovelet-middleware",
+ "version": "0.0.0",
+ "description": "pretty dovelet middle api",
+ "title": "middleware spi"
+}

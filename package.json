@@ -1,0 +1,11 @@
+{
+  "name": "pretty-dovelet-middleware",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/puroong/pretty-dovelet-middleware",
+  "author": "puroong <skfk0135@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "apidoc": "^0.17.6"
+  }
+}
