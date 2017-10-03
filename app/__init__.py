@@ -6,6 +6,10 @@ app = Flask(__name__)
 api_root = Api(app)
 CORS(app)
 
+app.config.from_object('config')
+
 @app.route('/')
 def helloworld():
     return "hello world"
+
+from app import resources
