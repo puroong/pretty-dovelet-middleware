@@ -1,0 +1,15 @@
+define({
+  "name": "pretty-dovelet-middleware",
+  "version": "1.0.0",
+  "description": "pretty dovelet middle api",
+  "title": "middleware spi",
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2017-10-04T09:54:50.402Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.6"
+  }
+});
