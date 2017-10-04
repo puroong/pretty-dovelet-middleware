@@ -4,7 +4,7 @@ from flask import request
 from flask_restful import Resource, reqparse
 
 @api_root.resource('/v1/stair/<int:stair_num>')
-class Stiar(Resource):
+class Stair(Resource):
   """
   @api {get} /v1/stair/:stair_num Get stair problems
   @apiVersion 1.0.0
