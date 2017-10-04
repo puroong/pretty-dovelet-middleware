@@ -27,7 +27,32 @@ class Login(Resource):
       'cookies': cookies
     }, code
 
-  @api_root.resource('v1/me')
+@api_root.resource('/v1/logout')
+class Logout(Resource):
+  def get(self):
+    # flask.request parses multiple set-cookies into string split by comma
+    # ex. phpsessid=213123, sessid=dsfjksdlf...
+
+    # parse cookies
+    set_cookies = request.headers.get('set-cookie')
+    
+    set_cookies = set_cookies.split(',')
+    cookies = {}
+    for set_cookie in set_cookies:
+      key = set_cookie.split('=')[0]
+      value = set_cookie.split('=')[1]
+
+      cookies[key] = value
+    
+    dovelet = util.Dovelet()
+
+    dovelet.logout(cookies=cookies)
+
+    return {
+      'success': True
+    }
+
+  @api_root.resource('/v1/me')
   class Profile(Resource):
     def get(self):
       # flask.request parses multiple set-cookies into string split by comma

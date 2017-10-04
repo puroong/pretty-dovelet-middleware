@@ -9,6 +9,7 @@ class DoveletConfig():
 
     # user url
     self.LOGIN_URL = 'login.php'
+    self.LOGOUT_URL = 'logout.php'
     self.PROFILE_URL = 'status.php'
 
     # problem url
@@ -65,6 +66,10 @@ class Dovelet():
     success = cookies != {}
 
     return success, cookies
+  
+  def logout(self, cookies):
+    url = self.make_url(self.config.LOGOUT_URL, {})
+    r = requests.get(url)
 
   def profile(self, cookies):
     url = self.make_url(self.config.PROFILE_URL, {})
